@@ -3,12 +3,8 @@ module.exports = {
     title: 'Blah Blah Fake Title',
   },
   plugins: [
-      {
-        resolve: 'gatsby-plugin-react-helmet',
-      },
-      {
-        resolve: 'gatsby-plugin-styled-components',
-      },
+      'gatsby-plugin-react-helmet',
+      'gatsby-plugin-styled-components',
       {
         resolve: 'gatsby-source-filesystem',
         options: {
@@ -16,13 +12,12 @@ module.exports = {
           path: `${__dirname}/src/`,
         },
       },
+      `gatsby-transformer-remark`,
+      `gatsby-plugin-glamor`,
       {
-        resolve: 'gatsby-plugin-glamor',
+        resolve: `gatsby-plugin-typography`,
         options: {
-          resolve: 'gatsby-plugin-typography',
-          options: {
-            pathToConfigModule: `src/utils/typography`,
-          },
+          pathToConfigModule: `src/utils/typography`,
         },
       },
     ],

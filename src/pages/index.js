@@ -1,18 +1,55 @@
 import React from 'react'
+import styled from 'styled-components'
 import Link from 'gatsby-link'
+import { rhythm } from "../utils/typography";
 
-const IndexPage = () => (
-  <div>
-    <h1>Amazing Pandas Eating Things</h1>
+export default ({ data}) => {
+  console.log(data)
+  return (
     <div>
-      <img
-        src="https://2.bp.blogspot.com/-BMP2l6Hwvp4/TiAxeGx4CTI/AAAAAAAAD_M/XlC_mY3SoEw/s1600/panda-group-eating-bamboo.jpg"
-        alt="Group of pandas eating bamboo"
-        width="724"
-        height="483"
-      />
+      <H1>
+        Amazing Pandas Eating Things
+      </H1>
+      <h4>{ data.allMarkdownRemark.totalCount} posts</h4>
+      { data.allMarkdownRemark.edges.map(({ node }) => (
+        <div key={ node.id }>
+          <H3>
+            { node.frontmatter.title }{' '}
+            <Span>— { node.frontmatter.date }</Span>
+          </H3>
+          <p>{ node.excerpt }</p>
+        </div>
+      ))}
     </div>
-  </div>
-)
+  )
+}
 
-export default IndexPage
+const H1 = styled.h1`
+  display: inline-block;
+  border-bottom: 1px solid;
+`
+
+const H3 = styled.h3`
+  margin-bottom: ${ rhythm(1 / 4)};
+`
+
+const Span = styled.span`
+  color: #bbb;
+`
+export const query = graphql`
+  query IndexQuery {
+    allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
+      totalCount
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            date(formatString: "DD MMMM, YYYY")
+          }
+          excerpt
+        }
+      }
+    }
+  }
+`
