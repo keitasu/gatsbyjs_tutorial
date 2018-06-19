@@ -14,7 +14,7 @@ export default ({ children, data }) => (
       </H3>
     </Link>
     <Link className={linkStyle} to={`/about/`}>
-      { data.site.siteMetadata.title }
+      about
     </Link>
     {children()}
   </Container>

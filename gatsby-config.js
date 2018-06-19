@@ -10,6 +10,13 @@ module.exports = {
         resolve: 'gatsby-plugin-styled-components',
       },
       {
+        resolve: 'gatsby-source-filesystem',
+        options: {
+          name: 'src',
+          path: `${__dirname}/src/`,
+        },
+      },
+      {
         resolve: 'gatsby-plugin-glamor',
         options: {
           resolve: 'gatsby-plugin-typography',
