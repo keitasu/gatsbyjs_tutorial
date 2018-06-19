@@ -4,7 +4,6 @@ import Link from 'gatsby-link'
 import { rhythm } from "../utils/typography";
 
 export default ({ data}) => {
-  console.log(data)
   return (
     <div>
       <H1>
@@ -13,11 +12,16 @@ export default ({ data}) => {
       <h4>{ data.allMarkdownRemark.totalCount} posts</h4>
       { data.allMarkdownRemark.edges.map(({ node }) => (
         <div key={ node.id }>
+          <Link
+            to={ node.fields.slug}
+            css={{ textDecoration: `none`, color: `inherit` }}
+          >
           <H3>
             { node.frontmatter.title }{' '}
             <Span>— { node.frontmatter.date }</Span>
           </H3>
           <p>{ node.excerpt }</p>
+        </Link>
         </div>
       ))}
     </div>
@@ -46,6 +50,9 @@ export const query = graphql`
           frontmatter {
             title
             date(formatString: "DD MMMM, YYYY")
+          }
+          fields {
+            slug
           }
           excerpt
         }
